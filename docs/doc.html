@@ -72,15 +72,15 @@ a{
 
 ## Custom elements
 ### list
-list element `<l>content</l>`
+list element `&lt;l&gt;content&lt;/l&gt;`
 #### dot list
 .mdp:
 ```html
-<l> 
+&lt;l&gt; 
 John
 Jane
 Mike
-</l> 
+&lt;/l&gt; 
 ```
 .md:
 - John
@@ -89,11 +89,11 @@ Mike
 #### number list
 .mdp:
 ```html
-<l type="num"> 
+&lt;l type="num"&gt; 
 John
 Jane
 Mike
-</l> 
+&lt;/l&gt; 
 ```
 md:
 1) John
@@ -102,11 +102,11 @@ md:
 #### empty checkbox list
 .mdp:
 ```html
-<l type="chbox"> 
+&lt;l type="chbox"&gt; 
 John
 Jane
 Mike
-</l> 
+&lt;/l&gt; 
 ```
 md:
 - [ ] John
@@ -115,11 +115,11 @@ md:
 #### checked checkbox list
 .mdp:
 ```html
-<l type="chedbox"> 
+&lt;l type="chedbox"&gt; 
 John
 Jane
 Mike
-</l> 
+&lt;/l&gt; 
 ```
 md:
 - [X] John
@@ -128,12 +128,12 @@ md:
 ### csv table
 .mdp:
 ```html
-<csv> 
+&lt;csv&gt; 
 Name,Surname,Age
 John,Doe,25
 Jane,Smith,30
 Mike,Johnson,27
-</csv> 
+&lt;/csv&gt; 
 ```
 .md:
 | Name | Surname | Age |
@@ -145,9 +145,9 @@ Mike,Johnson,27
 #### output with command
 mdp:
 ```html
-<o cmd="echo Hello"> 
+&lt;o cmd="echo Hello"&gt; 
 Hello
-</o> 
+&lt;/o&gt; 
 ```
 md:
 ```bash
@@ -158,9 +158,9 @@ gh@repo:/$ █
 #### output without command
 mdp:
 ```html
-<o> 
+&lt;o&gt; 
 Deneme
-</o> 
+&lt;/o&gt; 
 ```
 md:
 ```bash
