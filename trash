@@ -1,0 +1,34 @@
+
+"""
+# -- dotlist element -- #
+while customelement("dl"):
+    newcon=""
+    for line in customelement("dl").splitlines():
+        newcon += "- "+line+"\n"
+    out = out.replace(customelement("dl"), newcon).replace("<dl>\n", "", 1).replace("</dl>\n", "", 1)
+
+
+# -- numberlist element -- #
+while customelement("nl"):
+    newcon=""
+    lastnum = 0
+    for line in customelement("nl").splitlines():
+        newcon += f"{str(lastnum+1)}) "+line+"\n"
+        lastnum+=1
+    out = out.replace(customelement("nl"), newcon).replace("<nl>\n", "", 1).replace("</nl>\n", "", 1)
+
+# -- checkedlist element -- #
+while customelement("checkedlist"):
+    newcon=""
+    for line in customelement("checkedlist").splitlines():
+        newcon += f"- [X] {line}\n"
+    out = out.replace(customelement("checkedlist"), newcon).replace("<checkedlist>\n", "", 1).replace("</checkedlist>\n", "", 1)
+
+# -- checkboxlist -- #
+# ! Sorun burda
+while customelement("checkboxlist"):
+    newcon=""
+    for line in customelement("checkboxlist").splitlines():
+        newcon += f"- [ ] {line}\n"
+    out = out.replace(customelement("checkboxlist"), newcon).replace("<checkboxlist>\n", "", 1).replace("</checkboxlist>\n", "", 1)
+"""

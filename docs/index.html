@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkdownPlus converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js">
+    </script>
+</head>
+<body>
+    <input type="file" id="fileInput" style="display: none;" accept=".mdp">
+    <!-- <h1>MarkdownPlus converter</h1> -->
+    <img src="logo.png" alt="logo">
+    <br>
+    <br>
+    <div class="badges">
+        <a class="badge" href="http://www.github.com/sanalzio/markdown-plus" target="_blank" rel="noopener noreferrer">
+            <img class="badge" src="https://custom-icon-badges.demolab.com/badge/Repo-black.svg?&logo=repo&logoColor=blue&style=for-the-badge" />
+        </a>
+        <img class="badge" src="https://custom-icon-badges.demolab.com/github/stars/sanalzio/markdown-plus.svg?color=yellow&logo=star&logoColor=darkyellow&style=for-the-badge" alt="repository stars">
+    </div>
+    <p></p>
+    <div class="editor">
+        <div>
+            <button id="uploadButton" onclick="selectFile()">Load File</button>
+            <button id="cls" onclick="document.getElementById('editor').value=''">Clear</button>
+        </div>
+        <textarea name="editor" id="editor" cols="85" rows="25">
+# <center>Center heading</center>
+## output with command
+<o cmd="echo Hello">
+Hello
+</o>
+
+## output without command
+<o>
+Deneme
+</o>
+
+## csv table
+<csv>
+Name,Surname,Age
+John,Doe,25
+Jane,Smith,30
+Mike,Johnson,27
+</csv>
+
+## dot list
+<l>
+John
+Jane
+Mike
+</l>
+
+## number list
+<l type="num">
+John
+Jane
+Mike
+</l>
+
+## empty checkbox list
+<l type="chbox">
+John
+Jane
+Mike
+</l>
+
+## checked checkbox list
+<l type="chedbox">
+John
+Jane
+Mike
+</l>
+
+## youtube embed (width 400)
+$ytembed R2dqWt81lxo
+
+## connect badges
+### github badge (`for-the-badge` style)
+
+$github sanalzio  style=for-the-badge
+### email badge (no custom options)
+
+$email sanalzio@duck.com
+### website badge (`for-the-badge` style and custom color)
+
+$website sanalzio.github.io darkred style=for-the-badge
+
+## buymeacoffee badge (no custom options)
+$buymeacoffee sanalzio
+
+## github status badges
+### github stats embed (with `show_icons=true` and `rank_icon=github` options)
+
+$stats sanalzio true rank_icon=github
+### github top langs embed (with `layout=compact` option)
+
+$toplangs sanalzio compact
+
+## custom badge
+$badge Hello-World! darkred style=for-the-badge
+        </textarea>
+    </div>
+    <div class="view">
+        <div>
+            <button id="downButton" onclick='downFile()'>Download</button>
+            <button id="downButtonhtml" onclick='downFilehtml()'>Download Html</button>
+            <button id="copymd" onclick="cpymd()">Copy Content</button>
+        </div>
+        <div class="prev">
+            <md-block id="md">
+# <div align="center">Center heading</div>
+## output with command
+```bash
+gh@repo:/$ echo Hello
+Hello
+gh@repo:/$ █
+```
+
+## output without command
+```bash
+gh@repo:/$ 
+Deneme
+gh@repo:/$ █
+```
+
+## csv table
+| Name | Surname | Age |
+| --- | --- | --- |
+| John | Doe | 25 |
+| Jane | Smith | 30 |
+| Mike | Johnson | 27 |
+
+
+## dot list
+- John
+- Jane
+- Mike
+
+
+## number list
+1) John
+2) Jane
+3) Mike
+
+
+## empty checkbox list
+- [ ] John
+- [ ] Jane
+- [ ] Mike
+
+
+## checked checkbox list
+- [X] John
+- [X] Jane
+- [X] Mike
+
+
+## youtube embed (width 400)
+[<img src="https://img.youtube.com/vi/R2dqWt81lxo/maxresdefault.jpg" width="400" />](https://www.youtube.com/watch?v=R2dqWt81lxo)
+
+## connect badges
+### github badge (`for-the-badge` style)
+
+[<img src="https://img.shields.io/badge/Github-%2324292e.svg?&logo=github&style=for-the-badge" />](https://github.com/sanalzio)
+### email badge (no custom options)
+
+[<img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:sanalzio@duck.com)
+### website badge (`for-the-badge` style and custom color)
+
+[<img src="https://custom-icon-badges.demolab.com/badge/WebSite-darkred.svg?&logo=globe&style=for-the-badge" />](https://sanalzio.github.io)
+
+## buymeacoffee badge (no custom options)
+[<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/sanalzio)
+
+## github status badges
+### github stats embed (with `show_icons=true` and `rank_icon=github` options)
+
+![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=sanalzio&show_icons=true&rank_icon=github)
+### github top langs embed (with `layout=compact` option)
+
+![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=sanalzio&layout=compact)
+
+## custom badge
+![custom badge](https://img.shields.io/badge/Hello-World!-darkred.svg?&style=for-the-badge)
+            </md-block>
+        </div>
+    </div>
+    <footer><h3><a href="https://sanalzio.github.io/" target="_blank">Author: Sanalzio</a></h3></footer>
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <script src="script.js"></script>
+    <script type="text/python">
+        def convertmd(inp, html=False):
+            out=inp
+            if not inp.endswith("\n"):
+                out = inp+"\n"
+            else:
+                out = inp
+            def csvtomdtable(csv):
+                lines = csv.splitlines()
+                scsv = []
+                for li in range(0, len(lines)):
+                    line = lines[li]
+                    elements = []
+                    element = ""
+                    in_quotes = False
+                    for char in line:
+                        if char == '"' or char == "'":
+                            in_quotes = not in_quotes
+                        elif char == ',' and not in_quotes:
+                            elements.append(element)
+                            element = ""
+                        else:
+                            element += char
+                    elements.append(element)
+                    scsv.append(elements)
+                table=scsv
+                markdown_table = ""
+                markdown_table += "| " + " | ".join(table[0]) + " |\n"
+                markdown_table += "| " + " | ".join(["---"] * len(table[0])) + " |\n"
+                for row in table[1:]:
+                    markdown_table += "| " + " | ".join(row) + " |\n"
+                return markdown_table
+            def customelement(element: str):
+                lines = out.splitlines()
+                buldun=0
+                for lineindex in range(0, len(lines)-1):
+                    if lines[lineindex].startswith("<"+element) and lines[lineindex].endswith(">") and buldun!=1:
+                        con = ""
+                        for line in lines[lineindex+1:]:
+                            if line != "</"+element+">":
+                                con += line + "\n"
+                            else:
+                                return con.strip()
+                        buldun=1
+                return None
+            def customelement2(element):
+                lines = out.splitlines()
+                buldun=0
+                for lineindex in range(0, len(lines)-1):
+                    if lines[lineindex].startswith("<"+element) and lines[lineindex].endswith(">") and buldun!=1:
+                        con = lines[lineindex]+"\n"
+                        for line in lines[lineindex+1:]:
+                            if line != "</"+element+">":
+                                con += line + "\n"
+                            else:
+                                return con.strip()
+                        buldun=1
+                return None
+            out = out.replace("<center>", '<div align="center">')
+            out = out.replace("</center>", "</div>")
+            while customelement("csv"):
+                markdown_tablo = csvtomdtable(customelement("csv"))
+                out = out.replace("<csv>\n", "", 1).replace("</csv>\n", "", 1).replace(customelement("csv"), markdown_tablo, 1)
+            while customelement("l"):
+                lt=""
+                if len(customelement2("l").split("\n")[0].split("\""))>1:
+                    lt=customelement2("l").split("\n")[0].split("\"")[1]
+                newcon=""
+                lastnum = 0
+                for line in customelement("l").splitlines():
+                    if line.startswith(" "):
+                        evt=0
+                        bler=""
+                        for i in line:
+                            if i==" ":
+                                evt=1
+                                bler+=" "
+                            if evt==1 and i!=" ":
+                                if lt=="chbox":
+                                    newcon += bler+"- [ ] "+line.replace(bler, "")+"\n"
+                                elif lt=="chedbox":
+                                    newcon += bler+"- [X] "+line.replace(bler, "")+"\n"
+                                elif lt=="num":
+                                    newcon += f"{bler}{str(lastnum+1)}) "+line.replace(bler, "")+"\n"
+                                    lastnum+=1
+                                else:
+                                    newcon += bler+"- "+line.replace(bler, "")+"\n"
+                                evt=0
+                                bler=""
+                    else:
+                        if lt=="chbox":
+                            newcon += "- [ ] "+line+"\n"
+                        elif lt=="chedbox":
+                            newcon += "- [X] "+line+"\n"
+                        elif lt=="num":
+                            newcon += f"{str(lastnum+1)}) "+line+"\n"
+                            lastnum+=1
+                        else:
+                            newcon += "- "+line+"\n"
+                out = out.replace(customelement2("l").split("\n")[0]+"\n", "", 1).replace("</l>\n", "", 1).replace(customelement("l"), newcon, 1)
+            while customelement("o"):
+                cmd=""
+                lang="bash"
+                if len(customelement2("o").split("\n")[0].split("\""))>1:
+                    cmdi=0
+                    lai=0
+                    for i in customelement2("o").split("\n")[0].split("\""):
+                        if "cmd=" in i:
+                            cmdi=customelement2("o").split("\n")[0].split("\"").index(i)+1
+                        if "lang=" in i:
+                            lai=customelement2("o").split("\n")[0].split("\"").index(i)+1
+                    if "cmd=\"" in customelement2("o").split("\n")[0]:
+                        cmd=customelement2("o").split("\n")[0].split("\"")[cmdi]
+                    if "lang=\"" in customelement2("o").split("\n")[0]:
+                        lang=customelement2("o").split("\n")[0].split("\"")[lai]
+                newcon=f'```{lang}\ngh@repo:/$ {cmd}\n{customelement("o")}\ngh@repo:/$ █\n```'
+                out = out.replace(customelement2("o").split("\n")[0]+"\n", "", 1).replace("</o>\n", "", 1).replace(customelement("o"), newcon, 1)
+            lines=out.splitlines()
+            for line in lines:
+                lindex=lines.index(line)
+                arg=line.split(" ")
+                if line.startswith("$ytembed"):
+                    if len(arg)==3:
+                        lines[lindex]=f'[<img src="https://img.youtube.com/vi/{arg[1]}/maxresdefault.jpg" width="{arg[2]}" />](https://www.youtube.com/watch?v={arg[1]})'
+                    if len(arg)==4:
+                        lines[lindex]=f'[<img src="https://img.youtube.com/vi/{arg[1]}/maxresdefault.jpg" width="{arg[2]}" height="{arg[3]}" />](https://www.youtube.com/watch?v={arg[1]})'
+                    if len(arg)==2:
+                        lines[lindex]=f'[<img src="https://img.youtube.com/vi/{arg[1]}/maxresdefault.jpg" width="400" />](https://www.youtube.com/watch?v={arg[1]})'
+                cargs=""
+                if len(arg)>3:
+                    for i in arg[3:]:
+                        if i!="":
+                            cargs+="&"+i
+                if line.startswith("$email"):
+                    if len(arg)==2:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:{arg[1]})'
+                    if len(arg)==3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/E--Mail-{arg[2]}.svg?&logo=maildotru&logoColor=white" />](mailto:{arg[1]})'
+                    if len(arg)>3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/E--Mail-{"gray" if arg[2]=="" else arg[2]}.svg?&logo=maildotru{cargs}" />](mailto:{arg[1]})'
+                if line.startswith("$github"):
+                    if len(arg)==2:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Github-%2324292e.svg?&logo=github&logoColor=white" />](https://github.com/{arg[1]})'
+                    if len(arg)==3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Github-{arg[2]}.svg?&logo=github&logoColor=white" />](https://github.com/{arg[1]})'
+                    if len(arg)>3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Github-{"%2324292e" if arg[2]=="" else arg[2]}.svg?&logo=github{cargs}" />](https://github.com/{arg[1]})'
+                if line.startswith("$website"):
+                    if len(arg)==2:
+                        lines[lindex]=f'[<img src="https://custom-icon-badges.demolab.com/badge/WebSite-black.svg?&logo=globe&logoColor=darkgreen" />](https://{arg[1].replace("https://", "")})'
+                    if len(arg)==3:
+                        lines[lindex]=f'[<img src="https://custom-icon-badges.demolab.com/badge/WebSite-{arg[2]}.svg?&logo=globe&logoColor=darkgreen" />](https://{arg[1].replace("https://", "")})'
+                    if len(arg)>3:
+                        lines[lindex]=f'[<img src="https://custom-icon-badges.demolab.com/badge/WebSite-{"black" if arg[2]=="" else arg[2]}.svg?&logo=globe{cargs}" />](https://{arg[1].replace("https://", "")})'
+                if line.startswith("$badge"):
+                    if len(arg)==2:
+                        lines[lindex]=f'![custom badge](https://img.shields.io/badge/{arg[1]}-a.svg)'
+                    if len(arg)==3:
+                        lines[lindex]=f'![custom badge](https://img.shields.io/badge/{arg[1]}-{arg[2]}.svg)'
+                    if len(arg)>3:
+                        lines[lindex]=f'![custom badge](https://img.shields.io/badge/{arg[1]}-{"a" if arg[2]=="" else arg[2]}.svg?{cargs})'
+                if line.startswith("$buymeacoffee"):
+                    if len(arg)==2:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/{arg[1]})'
+                    if len(arg)==3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-{arg[2]}.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/{arg[1]})'
+                    if len(arg)>3:
+                        lines[lindex]=f'[<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-{"orange" if arg[2]=="" else arg[2]}.svg?&logo=buymeacoffee{cargs}" />](https://buymeacoffe.com/{arg[1]})'
+                if line.startswith("$views"):
+                    if len(arg)==2:
+                        lines[lindex]=f'![profile views](https://komarev.com/ghpvc/?username={arg[1]}&)'
+                    if len(arg)==3:
+                        lines[lindex]=f'![profile views](https://komarev.com/ghpvc/?username={arg[1]}&&style={arg[2]})'
+                if line.startswith("$stats"):
+                    if len(arg)==2:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api?username={arg[1]}&show_icons=true)'
+                    if len(arg)==3:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api?username={arg[1]}&show_icons={arg[2]})'
+                    if len(arg)>3:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api?username={arg[1]}&show_icons={arg[2] if arg[2]=="" else arg[2]}{cargs})'
+                if line.startswith("$toplangs"):
+                    if len(arg)==2:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username={arg[1]})'
+                    if len(arg)==3:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username={arg[1]}&layout={arg[2]})'
+                    if len(arg)>3:
+                        lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username={arg[1]}&layout={arg[2]}{cargs})'
+            out="\n".join(lines)
+            return out
+        from browser import timer, bind, document
+        def changemd():
+            document["md"].mdContent=convertmd(document["editor"].value)
+        timer.set_interval(changemd, 100)
+    </script>
+</body>
+</html>

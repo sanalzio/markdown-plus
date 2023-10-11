@@ -1,0 +1,78 @@
+# <center>Center heading</center>
+
+## output with command
+<o cmd="python3 print('Hello!')">
+Namer
+</o>
+
+## output without command
+<o>
+Deneme
+</o>
+
+## csv table
+<csv>
+Name,Surname,Age
+John,Doe,25
+Jane,Smith,30
+Mike,Johnson,27
+</csv>
+
+## dot list
+<l>
+John
+  Jane
+    Mike
+</l>
+
+## number list
+<l type="num">
+John
+Jane
+Mike
+</l>
+
+## empty checkbox list
+<l type="chbox">
+John
+Jane
+Mike
+</l>
+
+## checked checkbox list
+<l type="chedbox">
+John
+Jane
+Mike
+</l>
+
+## youtube embed (width 400)
+$ytembed R2dqWt81lxo
+
+## connect badges
+### github badge (`for-the-badge` style)
+
+$github sanalzio  style=for-the-badge
+### email badge (no custom options)
+
+$email sanalzio@duck.com
+### website badge (`for-the-badge` style and custom color)
+
+$website sanalzio.github.io darkred style=for-the-badge
+
+## buymeacoffee badge (no custom options)
+$buymeacoffee sanalzio
+
+## github status badges
+### profile views badge (no custom options)
+
+$views sanalzio
+### github stats embed (with `show_icons=true` and `rank_icon=github` options)
+
+$stats sanalzio true rank_icon=github
+### github top langs embed (with `layout=compact` option)
+
+$toplangs sanalzio compact
+
+## custom badge
+$badge Hello-World! darkred style=for-the-badge

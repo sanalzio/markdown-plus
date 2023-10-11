@@ -1,0 +1,20 @@
+# MarkdownPlus projesi
+- [X] Çalışma alanlarını oluştur ve aç.
+- [X] Temeli kur.
+- [X] center desteği.
+- [X] csv tablosu desteği
+- [X] dotlist elementi
+- [X] numberlist elementi
+- [X] checklist elementi
+- [X] checkbox elementi
+- [X] youtube embed desteği (https://img.youtube.com/vi/videoID/0.jpg) ile
+- [X] şu profile stats destği ama custom varaibaleli
+- [X] badge desteği ama custom varaibaleli birde şu özel badge api'lerinide koy
+- [X] write html compiler
+- [X] output element
+- [X] tüm listleri bir liste topla
+- [X] Şu html markdown'ı daha güzelleştir
+- [X] brython ile hallet temeli
+- [X] siteyi güzelleştir
+- [X] logo yaptır
+- [ ] "markdown-plus" repoya at
