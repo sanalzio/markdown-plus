@@ -17,4 +17,13 @@
 - [X] brython ile hallet temeli
 - [X] siteyi güzelleştir
 - [X] logo yaptır
-- [ ] "markdown-plus" repoya at
+- [X] "markdown-plus" repoya at
+- [X] üstün content değiştirme sistemi
+- [X] doc editle
+- [X] doc output lang ekle
+- [X] doc center ekle
+- [X] exampleleri editle
+- [X] vscode kullanmayı anlat
+- [X] exampleleri ekle
+- [ ] siteye aktar
+- [ ] gh'a aktar

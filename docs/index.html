@@ -14,6 +14,7 @@
     </script>
 </head>
 <body>
+    <button id="ifr" style="display: none;">None</button>
     <input type="file" id="fileInput" style="display: none;" accept=".mdp">
     <!-- <h1>MarkdownPlus converter</h1> -->
     <img src="logo.png" alt="logo">
@@ -34,13 +35,18 @@
         <textarea name="editor" id="editor" cols="85" rows="25">
 # <center>Center heading</center>
 ## output with command
-<o cmd="echo Hello">
-Hello
+<o cmd="python3 print('Hello!')">
+Hello!
 </o>
 
 ## output without command
 <o>
 Deneme
+</o>
+
+## output with custom language
+<o cmd="python3 print('Hello!')" lang="python">
+Hello!
 </o>
 
 ## csv table
@@ -54,8 +60,8 @@ Mike,Johnson,27
 ## dot list
 <l>
 John
-Jane
-Mike
+  Jane
+    Mike
 </l>
 
 ## number list
@@ -97,6 +103,9 @@ $website sanalzio.github.io darkred style=for-the-badge
 $buymeacoffee sanalzio
 
 ## github status badges
+### profile views badge (no custom options)
+
+$views sanalzio
 ### github stats embed (with `show_icons=true` and `rank_icon=github` options)
 
 $stats sanalzio true rank_icon=github
@@ -119,8 +128,8 @@ $badge Hello-World! darkred style=for-the-badge
 # <div align="center">Center heading</div>
 ## output with command
 ```bash
-gh@repo:/$ echo Hello
-Hello
+gh@repo:/$ python3 print('Hello!')
+Hello!
 gh@repo:/$ █
 ```
 
@@ -128,6 +137,13 @@ gh@repo:/$ █
 ```bash
 gh@repo:/$ 
 Deneme
+gh@repo:/$ █
+```
+
+## output with custom language
+```python
+gh@repo:/$ python3 print('Hello!')
+Hello!
 gh@repo:/$ █
 ```
 
@@ -141,8 +157,8 @@ gh@repo:/$ █
 
 ## dot list
 - John
-- Jane
-- Mike
+  - Jane
+    - Mike
 
 
 ## number list
@@ -181,6 +197,9 @@ gh@repo:/$ █
 [<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/sanalzio)
 
 ## github status badges
+### profile views badge (no custom options)
+
+![profile views](https://komarev.com/ghpvc/?username=sanalzio&)
 ### github stats embed (with `show_icons=true` and `rank_icon=github` options)
 
 ![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=sanalzio&show_icons=true&rank_icon=github)
@@ -197,12 +216,23 @@ gh@repo:/$ █
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
     <script src="script.js"></script>
     <script type="text/python">
-        def convertmd(inp, html=False):
+        def convertmd(inp):
             out=inp
             if not inp.endswith("\n"):
                 out = inp+"\n"
             else:
                 out = inp
+            def getblock(key: str):
+                lines = out.splitlines()
+                for lineindex in range(0, len(lines)-1):
+                    if lines[lineindex] == key:
+                        con = ""
+                        for line in lines[lineindex+1:]:
+                            if line != key:
+                                con += line + "\n"
+                            else:
+                                return con.strip()
+                return None
             def csvtomdtable(csv):
                 lines = csv.splitlines()
                 scsv = []
@@ -228,16 +258,17 @@ gh@repo:/$ █
                 for row in table[1:]:
                     markdown_table += "| " + " | ".join(row) + " |\n"
                 return markdown_table
-            def customelement(element: str):
+            def customelement(element: str, all=False):
                 lines = out.splitlines()
                 buldun=0
                 for lineindex in range(0, len(lines)-1):
                     if lines[lineindex].startswith("<"+element) and lines[lineindex].endswith(">") and buldun!=1:
-                        con = ""
+                        con = lines[lineindex]+"\n" if all else ""
                         for line in lines[lineindex+1:]:
                             if line != "</"+element+">":
                                 con += line + "\n"
                             else:
+                                if all: con += line + "\n"
                                 return con.strip()
                         buldun=1
                 return None
@@ -258,7 +289,7 @@ gh@repo:/$ █
             out = out.replace("</center>", "</div>")
             while customelement("csv"):
                 markdown_tablo = csvtomdtable(customelement("csv"))
-                out = out.replace("<csv>\n", "", 1).replace("</csv>\n", "", 1).replace(customelement("csv"), markdown_tablo, 1)
+                out = out.replace(customelement("csv", True), markdown_tablo)
             while customelement("l"):
                 lt=""
                 if len(customelement2("l").split("\n")[0].split("\""))>1:
@@ -295,7 +326,7 @@ gh@repo:/$ █
                             lastnum+=1
                         else:
                             newcon += "- "+line+"\n"
-                out = out.replace(customelement2("l").split("\n")[0]+"\n", "", 1).replace("</l>\n", "", 1).replace(customelement("l"), newcon, 1)
+                out = out.replace(customelement("l", True), newcon)
             while customelement("o"):
                 cmd=""
                 lang="bash"
@@ -312,7 +343,7 @@ gh@repo:/$ █
                     if "lang=\"" in customelement2("o").split("\n")[0]:
                         lang=customelement2("o").split("\n")[0].split("\"")[lai]
                 newcon=f'```{lang}\ngh@repo:/$ {cmd}\n{customelement("o")}\ngh@repo:/$ █\n```'
-                out = out.replace(customelement2("o").split("\n")[0]+"\n", "", 1).replace("</o>\n", "", 1).replace(customelement("o"), newcon, 1)
+                out = out.replace(customelement("o", True), newcon)
             lines=out.splitlines()
             for line in lines:
                 lindex=lines.index(line)
@@ -386,9 +417,18 @@ gh@repo:/$ █
             out="\n".join(lines)
             return out
         from browser import timer, bind, document
-        def changemd():
+        @bind("#editor", "input")
+        def changemd(ev):
             document["md"].mdContent=convertmd(document["editor"].value)
-        timer.set_interval(changemd, 100)
+        @bind("#ifr", "click")
+        def changemdfile(ev):
+            document["md"].mdContent=convertmd(document["editor"].value)
+        @bind("#cls", "click")
+        def changemdfile(ev):
+            document["md"].mdContent=""
+        #def changemd():
+        #    document["md"].mdContent=convertmd(document["editor"].value)
+        #timer.set_interval(changemd, 100)
     </script>
 </body>
 </html>

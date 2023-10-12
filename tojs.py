@@ -1,9 +1,20 @@
-def convertmd(inp, html=False):
+def convertmd(inp):
     out=inp
     if not inp.endswith("\n"):
         out = inp+"\n"
     else:
         out = inp
+    def getblock(key: str):
+        lines = out.splitlines()
+        for lineindex in range(0, len(lines)-1):
+            if lines[lineindex] == key:
+                con = ""
+                for line in lines[lineindex+1:]:
+                    if line != key:
+                        con += line + "\n"
+                    else:
+                        return con.strip()
+        return None
     def csvtomdtable(csv):
         lines = csv.splitlines()
         scsv = []
@@ -29,16 +40,17 @@ def convertmd(inp, html=False):
         for row in table[1:]:
             markdown_table += "| " + " | ".join(row) + " |\n"
         return markdown_table
-    def customelement(element: str):
+    def customelement(element: str, all=False):
         lines = out.splitlines()
         buldun=0
         for lineindex in range(0, len(lines)-1):
             if lines[lineindex].startswith("<"+element) and lines[lineindex].endswith(">") and buldun!=1:
-                con = ""
+                con = lines[lineindex]+"\n" if all else ""
                 for line in lines[lineindex+1:]:
                     if line != "</"+element+">":
                         con += line + "\n"
                     else:
+                        if all: con += line + "\n"
                         return con.strip()
                 buldun=1
         return None
@@ -59,7 +71,7 @@ def convertmd(inp, html=False):
     out = out.replace("</center>", "</div>")
     while customelement("csv"):
         markdown_tablo = csvtomdtable(customelement("csv"))
-        out = out.replace("<csv>\n", "", 1).replace("</csv>\n", "", 1).replace(customelement("csv"), markdown_tablo, 1)
+        out = out.replace(customelement("csv", True), markdown_tablo)
     while customelement("l"):
         lt=""
         if len(customelement2("l").split("\n")[0].split("\""))>1:
@@ -96,7 +108,7 @@ def convertmd(inp, html=False):
                     lastnum+=1
                 else:
                     newcon += "- "+line+"\n"
-        out = out.replace(customelement2("l").split("\n")[0]+"\n", "", 1).replace("</l>\n", "", 1).replace(customelement("l"), newcon, 1)
+        out = out.replace(customelement("l", True), newcon)
     while customelement("o"):
         cmd=""
         lang="bash"
@@ -112,12 +124,8 @@ def convertmd(inp, html=False):
                 cmd=customelement2("o").split("\n")[0].split("\"")[cmdi]
             if "lang=\"" in customelement2("o").split("\n")[0]:
                 lang=customelement2("o").split("\n")[0].split("\"")[lai]
-        newcon=f"""```{lang}
-    gh@repo:/$ {cmd}
-    {customelement("o")}
-    gh@repo:/$ █
-    ```"""
-        out = out.replace(customelement2("o").split("\n")[0]+"\n", "", 1).replace("</o>\n", "", 1).replace(customelement("o"), newcon, 1)
+        newcon=f'```{lang}\ngh@repo:/$ {cmd}\n{customelement("o")}\ngh@repo:/$ █\n```'
+        out = out.replace(customelement("o", True), newcon)
     lines=out.splitlines()
     for line in lines:
         lindex=lines.index(line)
@@ -189,3 +197,4 @@ def convertmd(inp, html=False):
             if len(arg)>3:
                 lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username={arg[1]}&layout={arg[2]}{cargs})'
     out="\n".join(lines)
+    return out

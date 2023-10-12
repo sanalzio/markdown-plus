@@ -1,7 +1,7 @@
 # <div align="center">Markdown Plus Documenetion</div>
 
-
 - [Custom elements](#custom-elements)
+  - [center element support](#center-element-support)
   - [list](#list)
     - [dot list](#dot-list)
     - [number list](#number-list)
@@ -9,10 +9,23 @@
     - [checked checkbox list](#checked-checkbox-list)
   - [csv table](#csv-table)
   - [output element](#output-element)
-- [Youtube embed](#youtube-embed-width-400)
-- [Badges](#badges)
+    - [output with command](#output-with-command)
+    - [output without command](#output-without-command)
+    - [output with custom lang](#output-with-custom-lang)
+- [youtube embed (width 400)](#youtube-embed-width-400)
+- [badges](#badges)
+- [Example files](#example-files)
 
 ## Custom elements
+### `<center>` element support
+You can use the `<center>` tag to center your text. It's not a part of Markdown, but some renderers like Github
+.mdb:
+```html
+<center> Some text </center>
+```
+md:
+<center> Some text </center>
+
 ### list
 list element `<l>content</l>`
 #### dot list
@@ -20,14 +33,22 @@ list element `<l>content</l>`
 ```html
 <l> 
 John
+  Doe
 Jane
+  Smith
 Mike
+  Johnson
+    27
 </l> 
 ```
 .md:
 - John
+  - Doe
 - Jane
+  - Smith
 - Mike
+  - Johnson
+    - 27
 #### number list
 .mdp:
 ```html
@@ -110,6 +131,19 @@ gh@repo:/$
 Deneme
 gh@repo:/$ █
 ```
+#### output with custom lang
+mdp:
+```html
+<o cmd="echo Hello" lang="python"> 
+Hello
+</o> 
+```
+md:
+```python
+gh@repo:/$ echo Hello
+Hello
+gh@repo:/$ █
+```
 ## youtube embed (width 400)
 `$ytembed R2dqWt81lxo`
 
@@ -158,3 +192,8 @@ gh@repo:/$ █
 `$badge Hello-World! darkred style=for-the-badge`
 
 ![custom badge](https://img.shields.io/badge/Hello-World!-darkred.svg?&style=for-the-badge)
+
+## Example files
+[**example .mdp file**](https://github.com/sanalzio/markdown-plus/blob/master/example.mdp)
+
+[**converted example file**](https://github.com/sanalzio/markdown-plus/blob/master/example.md)

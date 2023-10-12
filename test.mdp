@@ -2,12 +2,17 @@
 
 ## output with command
 <o cmd="python3 print('Hello!')">
-Namer
+Hello!
 </o>
 
 ## output without command
 <o>
 Deneme
+</o>
+
+## output with custom language
+<o cmd="python3 print('Hello!')" lang="python">
+Hello!
 </o>
 
 ## csv table

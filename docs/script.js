@@ -23,7 +23,8 @@ document.getElementById('fileInput').addEventListener('change', function () {
         reader.onload = function (e) {
             fileContentData = e.target.result;
             document.getElementById('editor').value=fileContentData
-            document.getElementById('md').mdContent=fileContentData
+            // document.getElementById('md').mdContent=fileContentData
+            document.getElementById('ifr').click();
         };
         reader.readAsText(file);
         fileInput.value = '';

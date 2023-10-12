@@ -3,7 +3,7 @@
 ## output with command
 ```bash
 gh@repo:/$ python3 print('Hello!')
-Namer
+Hello!
 gh@repo:/$ █
 ```
 
@@ -11,6 +11,13 @@ gh@repo:/$ █
 ```bash
 gh@repo:/$ 
 Deneme
+gh@repo:/$ █
+```
+
+## output with custom language
+```python
+gh@repo:/$ python3 print('Hello!')
+Hello!
 gh@repo:/$ █
 ```
 

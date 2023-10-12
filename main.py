@@ -53,16 +53,17 @@ def csvtomdtable(csv):
         markdown_table += "| " + " | ".join(row) + " |\n"
     return markdown_table
 
-def customelement(element: str):
+def customelement(element: str, all=False):
     lines = out.splitlines()
     buldun=0
     for lineindex in range(0, len(lines)-1):
         if lines[lineindex].startswith("<"+element) and lines[lineindex].endswith(">") and buldun!=1:
-            con = ""
+            con = lines[lineindex]+"\n" if all else ""
             for line in lines[lineindex+1:]:
                 if line != "</"+element+">":
                     con += line + "\n"
                 else:
+                    if all: con += line + "\n"
                     return con.strip()
             buldun=1
     return None
@@ -92,7 +93,8 @@ out = out.replace("</center>", "</div>")
 # -- csv to md table -- #
 while customelement("csv"):
     markdown_tablo = csvtomdtable(customelement("csv"))
-    out = out.replace("<csv>\n", "", 1).replace("</csv>\n", "", 1).replace(customelement("csv"), markdown_tablo, 1)
+    #out = out.replace("<csv>\n", "", 1).replace("</csv>\n", "", 1).replace(customelement("csv"), markdown_tablo, 1)
+    out = out.replace(customelement("csv", True), markdown_tablo)
 
 
 while customelement("l"):
@@ -131,7 +133,8 @@ while customelement("l"):
                 lastnum+=1
             else:
                 newcon += "- "+line+"\n"
-    out = out.replace(customelement2("l").split("\n")[0]+"\n", "", 1).replace("</l>\n", "", 1).replace(customelement("l"), newcon, 1)
+    #out = out.replace(customelement2("l").split("\n")[0]+"\n", "", 1).replace("</l>\n", "", 1).replace(customelement("l"), newcon, 1)
+    out = out.replace(customelement("l", True), newcon)
 
 
 # -- console output
@@ -151,7 +154,8 @@ while customelement("o"):
         if "lang=\"" in customelement2("o").split("\n")[0]:
             lang=customelement2("o").split("\n")[0].split("\"")[lai]
     newcon=f'```{lang}\ngh@repo:/$ {cmd}\n{customelement("o")}\ngh@repo:/$ █\n```'
-    out = out.replace(customelement2("o").split("\n")[0]+"\n", "", 1).replace("</o>\n", "", 1).replace(customelement("o"), newcon, 1)
+    #out = out.replace(customelement2("o").split("\n")[0]+"\n", "", 1).replace("</o>\n", "", 1).replace(customelement("o"), newcon, 1)
+    out = out.replace(customelement("o", True), newcon)
 
 
 # ---- line elements ---- #
