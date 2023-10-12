@@ -8,7 +8,7 @@
     - [step1](#step1)
     - [step2](#step2)
     - [step3](#step3)
-  - [Documention](#documention)
+  - [Go Documention](#go-documention)
 
 ## What is the markdown plus?
 Markdown Plus makes it easier to create README.md for your projects' repositories.
@@ -33,4 +33,4 @@ In the opened window, enter 'markdown' in the search field and select the Markdo
 
 ![step3](img/step3.png)
 
-## [Documention](https://sanalzio.github.io/markdown-plus/doc.html)
+## [Go Documention](https://sanalzio.github.io/markdown-plus/doc.html)
