@@ -36,12 +36,16 @@ html {
 	background-color: #282d35;
 	color: #d09a67;
 	border-color: #282d35;
+	height: 60.7vh;
+	width: 100%;
 	border-width: 7px;
 	border-radius: 10px;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	outline:0px none transparent;
 }
 #editor::-webkit-scrollbar {
 	width: 6px;
+	height: 6px;
 }
 #editor::-webkit-scrollbar-thumb {
 	background-color: #888;
@@ -80,6 +84,7 @@ div.prev {
 }
 div.prev::-webkit-scrollbar {
 	width: 6px;
+	height: 6px;
 }
 div.prev::-webkit-scrollbar-thumb {
 	background-color: #888;
