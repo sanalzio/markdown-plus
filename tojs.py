@@ -4,17 +4,6 @@ def convertmd(inp):
         out = inp+"\n"
     else:
         out = inp
-    def getblock(key: str):
-        lines = out.splitlines()
-        for lineindex in range(0, len(lines)-1):
-            if lines[lineindex] == key:
-                con = ""
-                for line in lines[lineindex+1:]:
-                    if line != key:
-                        con += line + "\n"
-                    else:
-                        return con.strip()
-        return None
     def csvtomdtable(csv):
         lines = csv.splitlines()
         scsv = []
@@ -67,6 +56,41 @@ def convertmd(inp):
                         return con.strip()
                 buldun=1
         return None
+    def mdid(text):
+        text = text.lower()
+        text = text.replace(' ', '-')
+        allowed_characters = 'abcdefghijklmnopqrstuvwxyz0123456789-'
+        text = ''.join(char for char in text if char in allowed_characters)
+        return text
+    def rlc(string):
+        l=list(string)
+        l.pop()
+        return "".join(l)
+    def gnav(ifo=True, minh=6):
+        lines=out.splitlines()
+        links=[]
+        for li in range(0,len(lines)-1):
+            line=lines[li].replace("<div align=\"center\">", "").replace("</div>", "")
+            for thc in range(1,minh+1):
+                tht=(thc*"#")+" "
+                title=line.replace(tht, '')
+                url=mdid(line.replace(tht, ''))
+                if not line.startswith(tht):
+                    continue
+                else:
+                    links.append(((thc-1)*'  ')+'- '+f"[{title}](#{url})")
+        links=links if ifo else links[1:]
+        for nl in links:
+            if links.count(nl)==1:
+                continue
+            count=1
+            while count<=links.count(nl):
+                for nnl in links:
+                    if nnl!=nl:
+                        continue
+                    links[links.index(nnl)] = rlc(nnl)+"-"+str(count)+")"
+                    count+=1
+        return "\n".join(links)
     out = out.replace("<center>", '<div align="center">')
     out = out.replace("</center>", "</div>")
     while customelement("csv"):
@@ -142,6 +166,13 @@ def convertmd(inp):
             for i in arg[3:]:
                 if i!="":
                     cargs+="&"+i
+        if line.startswith("$nav"):
+            if len(arg)==1:
+                lines[lindex]=gnav()
+            if len(arg)==2:
+                lines[lindex]=gnav(True if arg[1].lower()!="false" else False)
+            if len(arg)==3:
+                lines[lindex]=gnav(True if arg[1].lower()!="false" else False, 6 if arg[2]=="" else int(arg[2]))
         if line.startswith("$email"):
             if len(arg)==2:
                 lines[lindex]=f'[<img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:{arg[1]})'

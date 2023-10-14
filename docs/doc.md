@@ -1,5 +1,6 @@
 # <div align="center">Markdown Plus Documenetion</div>
 
+- [Navigation](#navigation)
 - [Custom elements](#custom-elements)
   - [center element support](#center-element-support)
   - [list](#list)
@@ -16,15 +17,103 @@
 - [badges](#badges)
 - [Example files](#example-files)
 
+## Navigation
+mdp:
+`$nav`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+### Do not include the first one.
+mdp:
+`$nav false`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+### min heading
+mdp:
+`$nav true 2`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+
 ## Custom elements
-### `<center>` element support
-You can use the `<center>` tag to center your text. It's not a part of Markdown, but some renderers like Github
+### `<div align="center">` element support
+You can use the `<div align="center">` tag to center your text. It's not a part of Markdown, but some renderers like Github
 .mdb:
 ```html
-<center> Some text </center>
+<div align="center"> Some text </div>
 ```
 md:
-<center> Some text </center>
+<div align="center"> Some text </div>
 
 ### list
 list element `<l>content</l>`

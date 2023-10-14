@@ -25,5 +25,6 @@
 - [X] exampleleri editle
 - [X] vscode kullanmayı anlat
 - [X] exampleleri ekle
-- [ ] siteye aktar
-- [ ] gh'a aktar
+- [X] siteye aktar
+- [X] gh'a aktar
+- [ ] navigator yap ve hem last heading ve add title seçenekleri ekle

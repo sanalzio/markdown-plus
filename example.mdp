@@ -1,5 +1,27 @@
 # <center>Center heading</center>
 
+$nav true 2
+
+## navigation
+### Include the first one.
+mdp:
+`$nav`
+
+md:
+$nav
+### Do not include the first one.
+mdp:
+`$nav false`
+
+md:
+$nav false
+### min heading
+mdp:
+`$nav true 2`
+
+md:
+$nav true 2
+
 ## output with command
 <o cmd="python3 print('Hello!')">
 Hello!
@@ -81,3 +103,4 @@ $toplangs sanalzio compact
 
 ## custom badge
 $badge Hello-World! darkred style=for-the-badge
+        

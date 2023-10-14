@@ -58,6 +58,7 @@ a{
 <div id="jasdhlajkhdsjakhdajklsd">
 <md-block># <div align="center">Markdown Plus Documenetion</div>
 
+- [Navigation](#navigation)
 - [Custom elements](#custom-elements)
   - [center element support](#center-element-support)
   - [list](#list)
@@ -74,22 +75,110 @@ a{
 - [badges](#badges)
 - [Example files](#example-files)
 
+## Navigation
+mdp:
+`$nav`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+### Do not include the first one.
+mdp:
+`$nav false`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+### min heading
+mdp:
+`$nav true 2`
+
+md:
+- [Center heading](#center-heading)
+  - [navigation](#navigation)
+    - [Include the first one.](#include-the-first-one)
+    - [Do not include the first one.](#do-not-include-the-first-one)
+    - [min heading](#min-heading)
+  - [output with command](#output-with-command)
+  - [output without command](#output-without-command)
+  - [output with custom language](#output-with-custom-language)
+  - [csv table](#csv-table)
+  - [dot list](#dot-list)
+  - [number list](#number-list)
+  - [empty checkbox list](#empty-checkbox-list)
+  - [checked checkbox list](#checked-checkbox-list)
+  - [youtube embed (width 400)](#youtube-embed-width-400)
+  - [connect badges](#connect-badges)
+    - [github badge (`for-the-badge` style)](#github-badge-for-the-badge-style)
+    - [email badge (no custom options)](#email-badge-no-custom-options)
+    - [website badge (`for-the-badge` style and custom color)](#website-badge-for-the-badge-style-and-custom-color)
+  - [buymeacoffee badge (no custom options)](#buymeacoffee-badge-no-custom-options)
+  - [github status badges](#github-status-badges)
+    - [profile views badge (no custom options)](#profile-views-badge-no-custom-options)
+    - [github stats embed (with `show_icons=true` and `rank_icon=github` options)](#github-stats-embed-with-show_iconstrue-and-rank_icongithub-options)
+    - [github top langs embed (with `layout=compact` option)](#github-top-langs-embed-with-layoutcompact-option)
+  - [custom badge](#custom-badge)
+
 ## Custom elements
-### `&lt;div align="center"&gt;` element support
-You can use the `&lt;div align="center"&gt;` tag to center your text. It's not a part of Markdown, but some renderers like Github
+### `<div align="center">` element support
+You can use the `<div align="center">` tag to center your text. It's not a part of Markdown, but some renderers like Github
 .mdb:
 ```html
-&lt;div align="center"&gt; Some text &lt;/div&gt;
+<div align="center"> Some text </div>
 ```
 md:
-&lt;div align="center"&gt; Some text &lt;/div&gt;
+<div align="center"> Some text </div>
 
 ### list
-list element `&lt;l&gt;content&lt;/l&gt;`
+list element `<l>content</l>`
 #### dot list
 .mdp:
 ```html
-&lt;l&gt; 
+<l> 
 John
   Doe
 Jane
@@ -97,7 +186,7 @@ Jane
 Mike
   Johnson
     27
-&lt;/l&gt; 
+</l> 
 ```
 .md:
 - John
@@ -110,11 +199,11 @@ Mike
 #### number list
 .mdp:
 ```html
-&lt;l type="num"&gt; 
+<l type="num"> 
 John
 Jane
 Mike
-&lt;/l&gt; 
+</l> 
 ```
 md:
 1) John
@@ -123,11 +212,11 @@ md:
 #### empty checkbox list
 .mdp:
 ```html
-&lt;l type="chbox"&gt; 
+<l type="chbox"> 
 John
 Jane
 Mike
-&lt;/l&gt; 
+</l> 
 ```
 md:
 - [ ] John
@@ -136,11 +225,11 @@ md:
 #### checked checkbox list
 .mdp:
 ```html
-&lt;l type="chedbox"&gt; 
+<l type="chedbox"> 
 John
 Jane
 Mike
-&lt;/l&gt; 
+</l> 
 ```
 md:
 - [X] John
@@ -149,12 +238,12 @@ md:
 ### csv table
 .mdp:
 ```html
-&lt;csv&gt; 
+<csv> 
 Name,Surname,Age
 John,Doe,25
 Jane,Smith,30
 Mike,Johnson,27
-&lt;/csv&gt; 
+</csv> 
 ```
 .md:
 | Name | Surname | Age |
@@ -166,9 +255,9 @@ Mike,Johnson,27
 #### output with command
 mdp:
 ```html
-&lt;o cmd="echo Hello"&gt; 
+<o cmd="echo Hello"> 
 Hello
-&lt;/o&gt; 
+</o> 
 ```
 md:
 ```bash
@@ -179,9 +268,9 @@ gh@repo:/$ █
 #### output without command
 mdp:
 ```html
-&lt;o&gt; 
+<o> 
 Deneme
-&lt;/o&gt; 
+</o> 
 ```
 md:
 ```bash
@@ -192,9 +281,9 @@ gh@repo:/$ █
 #### output with custom lang
 mdp:
 ```html
-&lt;o cmd="echo Hello" lang="python"&gt; 
+<o cmd="echo Hello" lang="python"> 
 Hello
-&lt;/o&gt; 
+</o> 
 ```
 md:
 ```python
@@ -205,29 +294,29 @@ gh@repo:/$ █
 ## youtube embed (width 400)
 `$ytembed R2dqWt81lxo`
 
-[&lt;img src="https://img.youtube.com/vi/R2dqWt81lxo/maxresdefault.jpg" width="400" />](https://www.youtube.com/watch?v=R2dqWt81lxo)
+[<img src="https://img.youtube.com/vi/R2dqWt81lxo/maxresdefault.jpg" width="400" />](https://www.youtube.com/watch?v=R2dqWt81lxo)
 
 ## badges
 ### github badge (`for-the-badge` style)
 
 `$github sanalzio  style=for-the-badge`
 
-[&lt;img src="https://img.shields.io/badge/Github-%2324292e.svg?&logo=github&style=for-the-badge" />](https://github.com/sanalzio)
+[<img src="https://img.shields.io/badge/Github-%2324292e.svg?&logo=github&style=for-the-badge" />](https://github.com/sanalzio)
 ### email badge (no custom options)
 
 `$email sanalzio@duck.com`
 
-[&lt;img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:sanalzio@duck.com)
+[<img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:sanalzio@duck.com)
 ### website badge (`for-the-badge` style and custom color)
 
 `$website sanalzio.github.io darkred style=for-the-badge`
 
-[&lt;img src="https://custom-icon-badges.demolab.com/badge/WebSite-darkred.svg?&logo=globe&style=for-the-badge" />](https://sanalzio.github.io)
+[<img src="https://custom-icon-badges.demolab.com/badge/WebSite-darkred.svg?&logo=globe&style=for-the-badge" />](https://sanalzio.github.io)
 
 ## buymeacoffee badge (no custom options)
 `$buymeacoffee sanalzio`
 
-[&lt;img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/sanalzio)
+[<img src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?&logo=buymeacoffee&logoColor=yellow" />](https://buymeacoffe.com/sanalzio)
 
 ## github status badges
 ### profile views badge (no custom options)

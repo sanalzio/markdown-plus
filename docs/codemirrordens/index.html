@@ -12,6 +12,24 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/brython@3.12.0/brython_stdlib.js">
     </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/theme/ayu-mirage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/hint/show-hint.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/theme/dracula.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/hint/show-hint.css">
+    <style>
+        .CodeMirror-gutter {
+            border-right: 1px solid #44475a;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/markdown/markdown.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/hint/show-hint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/hint/anyword-hint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/edit/closebrackets.js"></script>
 </head>
 <body>
     <button id="ifr" style="display: none;">None</button>
@@ -30,7 +48,7 @@
     <div class="editor">
         <div>
             <button id="uploadButton" onclick="selectFile()">Load File</button>
-            <button id="cls" onclick="document.getElementById('editor').value=''">Clear</button>
+            <!-- <button id="cls" onclick="document.getElementById('editor').value=''">Clear</button> -->
         </div>
         <textarea name="editor" id="editor" cols="85" rows="25">
 # <center>Center heading</center>
@@ -123,7 +141,7 @@ $badge Hello-World! darkred style=for-the-badge
             <button id="downButtonhtml" onclick='downFilehtml()'>Download Html</button>
             <button id="copymd" onclick="cpymd()">Copy Content</button>
         </div>
-        <div class="prev">
+        <div id="prev" style="height: 55.3vh;">
             <md-block id="md">
 # <div align="center">Center heading</div>
 ## output with command
@@ -222,6 +240,17 @@ gh@repo:/$ █
                 out = inp+"\n"
             else:
                 out = inp
+            def getblock(key: str):
+                lines = out.splitlines()
+                for lineindex in range(0, len(lines)-1):
+                    if lines[lineindex] == key:
+                        con = ""
+                        for line in lines[lineindex+1:]:
+                            if line != key:
+                                con += line + "\n"
+                            else:
+                                return con.strip()
+                return None
             def csvtomdtable(csv):
                 lines = csv.splitlines()
                 scsv = []
@@ -274,41 +303,6 @@ gh@repo:/$ █
                                 return con.strip()
                         buldun=1
                 return None
-            def mdid(text):
-                text = text.lower()
-                text = text.replace(' ', '-')
-                allowed_characters = 'abcdefghijklmnopqrstuvwxyz0123456789-'
-                text = ''.join(char for char in text if char in allowed_characters)
-                return text
-            def rlc(string):
-                l=list(string)
-                l.pop()
-                return "".join(l)
-            def gnav(ifo=True, minh=6):
-                lines=out.splitlines()
-                links=[]
-                for li in range(0,len(lines)-1):
-                    line=lines[li].replace("<div align=\"center\">", "").replace("</div>", "")
-                    for thc in range(1,minh+1):
-                        tht=(thc*"#")+" "
-                        title=line.replace(tht, '')
-                        url=mdid(line.replace(tht, ''))
-                        if not line.startswith(tht):
-                            continue
-                        else:
-                            links.append(((thc-1)*'  ')+'- '+f"[{title}](#{url})")
-                links=links if ifo else links[1:]
-                for nl in links:
-                    if links.count(nl)==1:
-                        continue
-                    count=1
-                    while count<=links.count(nl):
-                        for nnl in links:
-                            if nnl!=nl:
-                                continue
-                            links[links.index(nnl)] = rlc(nnl)+"-"+str(count)+")"
-                            count+=1
-                return "\n".join(links)
             out = out.replace("<center>", '<div align="center">')
             out = out.replace("</center>", "</div>")
             while customelement("csv"):
@@ -384,13 +378,6 @@ gh@repo:/$ █
                     for i in arg[3:]:
                         if i!="":
                             cargs+="&"+i
-                if line.startswith("$nav"):
-                    if len(arg)==1:
-                        lines[lindex]=gnav()
-                    if len(arg)==2:
-                        lines[lindex]=gnav(True if arg[1].lower()!="false" else False)
-                    if len(arg)==3:
-                        lines[lindex]=gnav(True if arg[1].lower()!="false" else False, 6 if arg[2]=="" else int(arg[2]))
                 if line.startswith("$email"):
                     if len(arg)==2:
                         lines[lindex]=f'[<img src="https://img.shields.io/badge/E--Mail-gray.svg?&logo=maildotru&logoColor=white" />](mailto:{arg[1]})'
@@ -447,16 +434,20 @@ gh@repo:/$ █
                         lines[lindex]=f'![My GitHub Stats](https://github-readme-stats.vercel.app/api/top-langs/?username={arg[1]}&layout={arg[2]}{cargs})'
             out="\n".join(lines)
             return out
-        from browser import timer, bind, document
-        @bind("#editor", "input")
-        def changemd(ev):
-            document["md"].mdContent=convertmd(document["editor"].value)
-        @bind("#ifr", "click")
-        def changemdfile(ev):
-            document["md"].mdContent=convertmd(document["editor"].value)
-        @bind("#cls", "click")
-        def changemdfile(ev):
-            document["md"].mdContent=""
+        from browser import timer, bind, document, window
+        def changemark(con):
+            document["md"].mdContent=convertmd(con)
+        window.changemark=changemark
+        #@bind("#editor", "input")
+        #def changemd(ev):
+        #    document["md"].mdContent=convertmd(document["editor"].value)
+        #@bind("#ifr", "click")
+        #def changemdfile(ev):
+        #    document["md"].mdContent=convertmd(document["editor"].value)
+        #@bind("#cls", "click")
+        #def changemdfile(ev):
+        #    document["md"].mdContent=""
+        #    window.clscon()
         #def changemd():
         #    document["md"].mdContent=convertmd(document["editor"].value)
         #timer.set_interval(changemd, 100)
